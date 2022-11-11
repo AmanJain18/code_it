@@ -3,6 +3,7 @@ import {v4 as uidv4} from 'uuid';
 // import  from 'react-router-dom';
 
 const Home = () => {
+   const [RoomId, setRoomId] = useState('');
    const [Username, setUsername] = useState('');
     const createRoomId = (e) => {
         e.preventDefault();
