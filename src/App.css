@@ -9,14 +9,43 @@
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease-in-out ;
+    background: #fff;
+    color: #000;
 }
-.joinBtn{
+.joinBtn, .leaveBtn{
     background: #4aee88;
     color: #fff;
     font-weight: bold;
     width: 100px;
 }
 
-.joinBtn:hover{
+.joinBtn:hover, .leaveBtn:hover{
     background: #1e944b;
+}
+
+.mainWrap{
+    display: grid;
+    grid-template-columns: 240px 1fr;
+}
+
+.clients{
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    align-items: center;
+}
+
+.userName {
+    margin-top: 10px;
+}
+
+.leaveBtn{
+    width: 100%;
+}
+
+.CodeMirror {
+    min-height: calc(100vh - 20px);
+    font-size: 20px;
+    line-height: 1.6;
+    padding-top: 20px;
 }
