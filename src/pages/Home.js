@@ -1,14 +1,33 @@
 import React, {useState} from 'react'
 import {v4 as uidv4} from 'uuid';
-// import  from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useNavigate} from 'react-router-dom';
 
 const Home = () => {
-   const [RoomId, setRoomId] = useState('');
-   const [Username, setUsername] = useState('');
+    const navigate = useNavigate();
+    const [RoomId, setRoomId] = useState('');
+    const [Username, setUsername] = useState('');
     const createRoomId = (e) => {
         e.preventDefault();
         const uid = uidv4();
         setRoomId(uid);
+        toast.success('New Room Created');
+    };
+    const joinRoom = (e) => {
+        if(!RoomId || !Username){
+            toast.error("Room Id and Username Required");
+            return;
+        }
+        navigate(`/editor/${RoomId}`, {
+            state: {
+                Username,
+            }
+        })
+    }
+    const inputEnter = (e) => {
+        if(e.code === 'Enter'){
+            joinRoom();
+        }
     }
   return (
     <div className="hpw flex justify-center items-center text-white h-[100vh]">
@@ -24,6 +43,7 @@ const Home = () => {
             value={RoomId}
             onChange={(e) => setRoomId(e.target.value)}
             placeholder="ROOM ID"
+            onKeyUp={inputEnter}
           />
           <input
             type="text"
@@ -31,8 +51,11 @@ const Home = () => {
             value={Username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="USERNAME"
+            onKeyUp={inputEnter}
           />
-          <button className="btn joinBtn">Join</button>
+          <button className="btn joinBtn" onClick={joinRoom}>
+            Join
+          </button>
           <span className="createInfo mx-auto mt-3 font-bold">
             Don't have an invite, create &nbsp;
             <a
